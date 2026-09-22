@@ -1,0 +1,88 @@
+# PROVENANCE · 第三方资源与来源说明
+
+本文件记录 Notehelper 仓库中**非本团队原创**或**来自外部来源**的资源、服务与灵感，
+便于赛事评审与后续维护核查每项资产的来路与许可。
+
+---
+
+## 1. 代码原创性声明
+
+- `www/` 下的全部前端代码（`index.html`、`css/app.css`、`js/user.js`、`js/app.js`、
+  `js/explore.js`、`js/search.js`）均为本团队原创实现。
+- **运行时零第三方 JS 库、零 CDN 依赖**：页面仅以 `<script>` 顺序加载上述本地文件，
+  不引入任何打包工具、框架或远程脚本。AI 能力通过浏览器直接调用 DeepSeek 官方 API 实现。
+- `android/` 为标准的 Android WebView 工程（壳），仅负责加载 `www/` 资源，无第三方 SDK。
+
+## 2. 界面图标 — Iconsax 免费图标集
+
+- 来源：<https://iconsax.io>（Iconsax Free）
+- 许可：免费用于个人与商业项目；作者建议保留出处署名（"a link back to iconsax.io is
+  appreciated"），本仓库已在下方署名，未强制要求。
+- 存放：`www/icons/`（20 个 SVG），与安卓壳
+  `android/app/src/main/assets/www/icons/` **逐文件 md5 一致**（项目约定：改图标须两边同步）。
+- 原始母本保留在 `iconsax/`（**不可直接编辑**，编辑请用 `www/icons/` 的副本）。
+- 其中 7 个图标（`maximize` / `search` / `mic` / `mic2` / `gallery` / `file` / `doc`）
+  已从白色改为各自容器墨色，以适配锁定的浅色界面；录制态另用
+  `filter: brightness(0) invert(1)` 反白。
+
+图标清单（工作副本名 → 用途）：
+
+| 文件 | 用途 |
+|------|------|
+| `add.svg` | 对话输入条「添加附件」 |
+| `aiadd.svg` | 底栏「新建笔记」 |
+| `ask.svg` | 笔记详情「DeepSeek 对话」触发 |
+| `back.svg` | 返回 |
+| `caretdown.svg` | 笔记分类展开箭头（← arrow-down4） |
+| `cursor.svg` | 笔记分类图标 |
+| `doc.svg` | 编辑器「文档」（← document-text） |
+| `edit.svg` | 编辑 |
+| `eraser.svg` | 导图节点「删除」 |
+| `file.svg` | 对话附件「文件」（← document-text） |
+| `gallery.svg` | 图片 |
+| `magicpen.svg` | 导图「AI 整理」 |
+| `maximize.svg` | 导图「适屏」 |
+| `microphone.svg` | 对话输入条麦克风 |
+| `mic.svg` | 对话附件「录音」 |
+| `mic2.svg` | 编辑器「录音」 |
+| `pencil.svg` | 导图「编辑」（← edit） |
+| `search.svg` | 搜索（← global-search） |
+| `stick.svg` | 导图「引用」 |
+| `write.svg` | 导图节点「重命名」 |
+
+> 注：`www/add.svg` 为早期遗留的 `aiadd` 重复副本，当前已无引用，保留仅为历史一致。
+
+## 3. AI 大模型服务 — DeepSeek
+
+- 服务：DeepSeek Chat Completions API
+  `https://api.deepseek.com/chat/completions`（见 `www/js/app.js`）
+- 形态：**运行时依赖，非仓库内资源**。API Key 由用户本人在「我的」页填入，仅存于
+  浏览器 `localStorage`，**不上传任何服务器**，不随仓库分发。
+- 用途：笔记自动摘要、单篇笔记智能问答、语义搜索、思维导图生成与「AI 整理」。
+
+## 4. 交互效果灵感 — Memorization UI（UWP Reveal）
+
+- 参考项目：Microsoft Fluent 1
+- 内容：按钮的「手电筒光效（UWP Reveal）」与物理卡片 3D 挤压、日间主题等**视觉/交互灵感**，
+  已在本项目重新实现，**未直接复制其代码或资源**。属设计借鉴，不构成 bundled 资产。
+
+## 5. 图片 / 设计素材
+
+以下为项目自带的设计/示例素材，用于界面展示与 README 配图：
+
+- `www/bg.png`、`www/img/avatar.jpg`、`www/img/history-timeline.jpg`、
+  `www/img/math-derivative.jpg`、`www/note-history.jpg`、`www/note-math.jpg`
+- `Resource/background.png`、`Resource/Deepseek.jpg`、`Resource/Deepseek.webp`
+- `Resource/Note/`、`download/笔记详情页/`（设计稿/参考图）
+
+> ⚠️ 维护提示：上述图片若含有第三方摄影/插画素材，请作者核对授权；本团队默认其为
+> 自绘或已获授权的设计素材。
+
+## 6. 构建与发布
+
+- APK 由 GitHub Actions 自动构建：`.github/workflows/build-apk.yml`，产物在 Actions Artifact。
+- 本仓库不含任何预编译二进制或闭源组件。
+
+---
+
+最后更新：2026-09-22
